@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Assignment.Core.Domain.Entities;
 using Assignment.Core.DTO;
 using Assignment.Core.Query;
+using Assignment.Helpers;
 using Assignment.Infrastructures.DAL.Services;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Infrastructure.Repositories;
@@ -30,19 +31,43 @@ namespace Assignment.Controllers
         [HttpGet("GetById")]
         public ActionResult<CustomerDTO> GetById(int customerId)
         {
-            return this.customerService.GetCustomerById(customerId);
+            if (!customerId.IsValidCustomerId())
+                return BadRequest();
+
+            var customer = this.customerService.GetCustomerById(customerId);
+
+            if (customer == null)
+                return NotFound();
+
+            return customer;
         }
 
         [HttpGet("GetByEmail")]
         public ActionResult<CustomerDTO> GetByEmail(string customerEmail)
         {
-            return this.customerService.GetCustomerByEmail(customerEmail);
+            if (!customerEmail.IsValidEmail())
+                return BadRequest();
+
+            var customer = this.customerService.GetCustomerByEmail(customerEmail);
+
+            if (customer == null)
+                return NotFound();
+
+            return customer;
         }
 
         [HttpGet("GetByIdAndEmail")]
         public ActionResult<CustomerDTO> GetByIdAndEmail(int customerId, string customerEmail)
         {
-            return this.customerService.GetByCustomerIdAndEmail(customerId, customerEmail);
+            if (!customerEmail.IsValidEmail() || !customerId.IsValidCustomerId())
+                return BadRequest();
+            
+            var customer = this.customerService.GetByCustomerIdAndEmail(customerId, customerEmail);
+
+            if (customer == null)
+                return NotFound();
+
+            return customer;
         }
     }
 }
