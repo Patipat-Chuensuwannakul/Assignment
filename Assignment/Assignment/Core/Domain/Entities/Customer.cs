@@ -8,7 +8,6 @@ namespace Assignment.Core.Domain.Entities
 {
     public class Customer : EntityBase<int>
     {
-        public int Id { get; set; }
         [StringLength(30)]
         public string Name { get; set; }
         [StringLength(25)]

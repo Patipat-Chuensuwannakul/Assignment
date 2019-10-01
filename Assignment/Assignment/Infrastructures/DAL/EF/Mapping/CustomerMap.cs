@@ -12,7 +12,7 @@ namespace Assignment.Infrastructures.DAL.Mappings
         public static ModelBuilder MapCustomer(this ModelBuilder modelBuilder)
         {
             var entity = modelBuilder.Entity<Customer>();
-            entity.Property(c => c.Id).ValueGeneratedOnAdd();
+            entity.Property(c => c.Id).ValueGeneratedOnAdd().HasMaxLength(10);
             entity.Property(c => c.CreatedDate);
             entity.Property(c => c.UpdatedDate);
 
