@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Assignment.Infrastructures;
+﻿using Assignment.Infrastructures;
 using Assignment.Infrastructures.DAL;
+using Assignment.Ioc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using StructureMap;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
 
 namespace Assignment
 {
@@ -26,9 +23,10 @@ namespace Assignment
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore); ;
 
             services.AddDbContext<AssignmentDbContext>(options =>
             {
@@ -42,6 +40,18 @@ namespace Assignment
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
 
+            return this.ConfigureIoC(services);
+        }
+
+        public virtual IServiceProvider ConfigureIoC(IServiceCollection services)
+        {
+            var container = new Container();
+            container.Configure(config =>
+            {
+                config.AddRegistry(new StructureMapRegistry());
+                config.Populate(services);
+            });
+            return container.GetInstance<IServiceProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,12 +66,8 @@ namespace Assignment
                     var services = serviceScope.ServiceProvider;
                     var context = services.GetService<AssignmentDbContext>();
 
-                    if (!context.AllMigrationsApplied())
-                    {
-                        context.Database.Migrate();
-                        context.EnsureSeeded();
-                    }
-
+                    context.Database.Migrate();
+                    context.EnsureSeeded();
                 }
 
             }
