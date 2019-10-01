@@ -19,8 +19,8 @@ namespace Assignment.Infrastructures.DAL
 
         }
 
-        public DbSet<Customer> CustomersDbSet { get; set; }
-        public DbSet<Transaction> TransactionsDbSet { get; set; }
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Transaction> Transaction { get; set; }
 
     }
 }
