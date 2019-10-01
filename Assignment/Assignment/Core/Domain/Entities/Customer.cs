@@ -15,7 +15,7 @@ namespace Assignment.Core.Domain.Entities
         public string Email { get; set; }
         [StringLength(10)]
         public string Mobile { get; set; }
-        public List<Transaction> Transactions { get; set; }
+        public IEnumerable<Transaction> Transactions { get; set; }
 
         public CustomerDTO ToDTO()
         {

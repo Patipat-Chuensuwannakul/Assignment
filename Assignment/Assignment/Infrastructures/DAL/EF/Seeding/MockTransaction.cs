@@ -16,8 +16,8 @@ namespace Assignment.Infrastructures.DAL.Seeding
                 Amount = 123.4M,
                 Currency = "USD",
                 Status = TransactionStatus.Success,
-                Customer = context.Customers.Where(c => c.Email == "test1@test.com").SingleOrDefault(),
-                CustomerId = context.Customers.Where(c => c.Email == "test1@test.com").Select(x => x.Id).SingleOrDefault()
+                Customer = context.Customers.Where(c => c.Id == 1).SingleOrDefault(),
+                CustomerId = context.Customers.Where(c => c.Id == 1).Select(x => x.Id).SingleOrDefault()
             };
             var mockTran2 = new Transaction()
             {
@@ -25,13 +25,22 @@ namespace Assignment.Infrastructures.DAL.Seeding
                 Amount = 456.7M,
                 Currency = "THB",
                 Status = TransactionStatus.Failed,
-                Customer = context.Customers.Where(c => c.Email == "test1@test.com").SingleOrDefault(),
-                CustomerId = context.Customers.Where(c => c.Email == "test1@test.com").Select(x => x.Id).SingleOrDefault()
+                Customer = context.Customers.Where(c => c.Id == 2).SingleOrDefault(),
+                CustomerId = context.Customers.Where(c => c.Id == 2).Select(x => x.Id).SingleOrDefault()
             };
-
+            var mockTran3 = new Transaction()
+            {
+                Date = DateTime.Now,
+                Amount = 678.9M,
+                Currency = "THB",
+                Status = TransactionStatus.Failed,
+                Customer = context.Customers.Where(c => c.Id == 1).SingleOrDefault(),
+                CustomerId = context.Customers.Where(c => c.Id == 1).Select(x => x.Id).SingleOrDefault()
+            };
 
             context.Add(mockTran1);
             context.Add(mockTran2);
+            context.Add(mockTran3);
             context.SaveChanges();
         }
     }
