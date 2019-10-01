@@ -14,14 +14,24 @@ namespace Assignment.Infrastructures.DAL.Services
         {
             this.customerRepository = customerRepository;
         }
-        public List<CustomerDTO> GetAll()
+        public List<CustomerDTO> GetAllCustomer()
         {
             return this.customerRepository.GetAll().Select(x=>x.ToDTO()).ToList();
         }
 
-        public CustomerDTO GetById(int id)
+        public CustomerDTO GetCustomerByEmail(string email)
         {
-            return this.customerRepository.GetByCustomerId(id).ToDTO();
+            return this.customerRepository.GetByEmail(email).ToDTO();
+        }
+
+        public CustomerDTO GetCustomerById(int id)
+        {
+            return this.customerRepository.GetById(id).ToDTO();
+        }
+
+        public CustomerDTO GetByCustomerIdAndEmail(int id, string email)
+        {
+            return this.customerRepository.GetByIdAndEmail(id,email).ToDTO();
         }
     }
 }

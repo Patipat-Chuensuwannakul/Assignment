@@ -19,12 +19,12 @@ namespace WebAPI.Infrastructure.Repositories
         {
             return assignmentDbContext.Customers.Include(x => x.Transactions);
         }
-        public Customer GetByCustomerId(int id)
+        public Customer GetById(int id)
         {
             return assignmentDbContext.Customers.Include(x => x.Transactions).SingleOrDefault(x => x.Id.Equals(id));
         }
 
-        public Customer GetByCustomerEmail(string email)
+        public Customer GetByEmail(string email)
         {
             return assignmentDbContext.Customers.Include(x => x.Transactions).SingleOrDefault(x => x.Email.Equals(email));
         }

@@ -24,13 +24,25 @@ namespace Assignment.Controllers
         [HttpGet("GetAll")]
         public ActionResult<List<CustomerDTO>> Get()
         {
-            return this.customerService.GetAll();
+            return this.customerService.GetAllCustomer();
         }
 
         [HttpGet("GetById")]
         public ActionResult<CustomerDTO> GetById(int customerId)
         {
-            return this.customerService.GetById(customerId);
+            return this.customerService.GetCustomerById(customerId);
+        }
+
+        [HttpGet("GetByEmail")]
+        public ActionResult<CustomerDTO> GetByEmail(string customerEmail)
+        {
+            return this.customerService.GetCustomerByEmail(customerEmail);
+        }
+
+        [HttpGet("GetByIdAndEmail")]
+        public ActionResult<CustomerDTO> GetByIdAndEmail(int customerId, string customerEmail)
+        {
+            return this.customerService.GetByCustomerIdAndEmail(customerId, customerEmail);
         }
     }
 }

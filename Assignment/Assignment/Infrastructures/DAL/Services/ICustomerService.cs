@@ -8,7 +8,9 @@ namespace Assignment.Infrastructures.DAL.Services
 {
     public interface ICustomerService
     {
-        List<CustomerDTO> GetAll();
-        CustomerDTO GetById(int id);
+        List<CustomerDTO> GetAllCustomer();
+        CustomerDTO GetCustomerByEmail(string email);
+        CustomerDTO GetCustomerById(int id);
+        CustomerDTO GetByCustomerIdAndEmail(int id, string email);
     }
 }
