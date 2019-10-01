@@ -8,6 +8,7 @@ namespace Assignment.Core.DTO
 {
     public class TransactionDTO
     {
+        public int Id { get; set; }
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
         public string Currency { get; set; }

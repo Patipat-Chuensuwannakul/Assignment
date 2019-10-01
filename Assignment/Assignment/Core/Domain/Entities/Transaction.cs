@@ -22,6 +22,7 @@ namespace Assignment.Core.Domain.Entities
         {
             return new TransactionDTO()
             {
+                Id = Id,
                 Date = Date,
                 Amount = Amount,
                 Currency = Currency,

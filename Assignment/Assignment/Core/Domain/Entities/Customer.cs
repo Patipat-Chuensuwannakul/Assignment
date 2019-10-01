@@ -19,6 +19,7 @@ namespace Assignment.Core.Domain.Entities
         {
             return new CustomerDTO()
             {
+                CustomerID = Id,
                 Name = Name,
                 Email = Email,
                 Mobile = Mobile,
