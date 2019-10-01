@@ -10,6 +10,7 @@ namespace Assignment.Infrastructures.DAL.Seeding
     {
         public static void CreateTransaction(AssignmentDbContext context)
         {
+            if (context.Transactions.Any()) return;
             var mockTran1 = new Transaction()
             {
                 Date = DateTime.Now,

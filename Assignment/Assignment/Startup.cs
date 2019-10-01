@@ -1,4 +1,8 @@
-﻿using Assignment.Infrastructures;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Assignment.Infrastructures;
 using Assignment.Infrastructures.DAL;
 using Assignment.Ioc;
 using Microsoft.AspNetCore.Builder;
@@ -7,9 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using StructureMap;
 using Swashbuckle.AspNetCore.Swagger;
-using System;
 
 namespace Assignment
 {
@@ -66,8 +71,11 @@ namespace Assignment
                     var services = serviceScope.ServiceProvider;
                     var context = services.GetService<AssignmentDbContext>();
 
-                    context.Database.Migrate();
-                    context.EnsureSeeded();
+                    if (!context.AllMigrationsApplied())
+                    {
+                        context.Database.Migrate();
+                        context.EnsureSeeded();
+                    }
                 }
 
             }
