@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,14 +10,15 @@ namespace Assignment.Helpers
 {
     public static class ValidateExtension
     {
-        public static bool IsValidEmail(this string email)
+        public static bool IsValidEmail(string email)
         {
-            return new EmailAddressAttribute().IsValid(email) && email.Length < 26;
+            return new EmailAddressAttribute().IsValid(email ?? string.Empty) && email.Length < 26;
         }
 
-        public static bool IsValidCustomerId(this int id)
+        public static bool IsValidCustomerId(int id)
         {
-            return id > 0 && id.ToString().Length < 11;
+            return id >= 0 && id.ToString().Length <= 10;
         }
+
     }
 }

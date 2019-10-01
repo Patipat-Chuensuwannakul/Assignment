@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Assignment.ActionFilters.Customer;
 using Assignment.Core.Domain.Entities;
 using Assignment.Core.DTO;
 using Assignment.Core.Query;
@@ -22,6 +23,7 @@ namespace Assignment.Controllers
         {
             this.customerService = customerService;
         }
+
         [HttpGet("GetAll")]
         public ActionResult<List<CustomerDTO>> Get()
         {
@@ -29,11 +31,9 @@ namespace Assignment.Controllers
         }
 
         [HttpGet("GetById")]
+        [ValidateGetById]
         public ActionResult<CustomerDTO> GetById(int customerId)
         {
-            if (!customerId.IsValidCustomerId())
-                return BadRequest();
-
             var customer = this.customerService.GetCustomerById(customerId);
 
             if (customer == null)
@@ -43,11 +43,9 @@ namespace Assignment.Controllers
         }
 
         [HttpGet("GetByEmail")]
+        [ValidateGetByEmail]
         public ActionResult<CustomerDTO> GetByEmail(string customerEmail)
         {
-            if (!customerEmail.IsValidEmail())
-                return BadRequest();
-
             var customer = this.customerService.GetCustomerByEmail(customerEmail);
 
             if (customer == null)
@@ -57,11 +55,9 @@ namespace Assignment.Controllers
         }
 
         [HttpGet("GetByIdAndEmail")]
+        [ValidateGetByIdAndEmail]
         public ActionResult<CustomerDTO> GetByIdAndEmail(int customerId, string customerEmail)
         {
-            if (!customerEmail.IsValidEmail() || !customerId.IsValidCustomerId())
-                return BadRequest();
-            
             var customer = this.customerService.GetByCustomerIdAndEmail(customerId, customerEmail);
 
             if (customer == null)

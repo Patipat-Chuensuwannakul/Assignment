@@ -16,22 +16,22 @@ namespace Assignment.Infrastructures.DAL.Services
         }
         public List<CustomerDTO> GetAllCustomer()
         {
-            return this.customerRepository.GetAll().Select(x=>x.ToDTO()).ToList();
+            return this.customerRepository.GetAll().Select(_=>_.ToDTO())?.ToList();
         }
 
         public CustomerDTO GetCustomerByEmail(string email)
         {
-            return this.customerRepository.GetByEmail(email).ToDTO();
+            return this.customerRepository.GetByEmail(email)?.ToDTO();
         }
 
         public CustomerDTO GetCustomerById(int id)
         {
-            return this.customerRepository.GetById(id).ToDTO();
+            return this.customerRepository.GetById(id)?.ToDTO();
         }
 
         public CustomerDTO GetByCustomerIdAndEmail(int id, string email)
         {
-            return this.customerRepository.GetByIdAndEmail(id,email).ToDTO();
+            return this.customerRepository.GetByIdAndEmail(id,email)?.ToDTO();
         }
     }
 }
