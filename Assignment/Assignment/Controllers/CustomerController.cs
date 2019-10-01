@@ -37,9 +37,8 @@ namespace Assignment.Controllers
                 Name = "Manao Test1",
                 Email = "manaotest@domain.com",
                 Mobile = "+66123456789",
-                transactions = new List<Transaction>() {
-                    new Transaction() {
-                        Id = 1,
+                Transactions = new List<TransactionDTO>() {
+                    new TransactionDTO() {
                         Date = DateTime.Now,
                         Amount = 1234.56M,
                         Currency = "USD",
