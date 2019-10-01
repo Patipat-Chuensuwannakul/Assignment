@@ -8,8 +8,5 @@ namespace Assignment.Infrastructures.DAL.Repositories
     public interface IRepository<T>
     {
         IEnumerable<T> GetAll();
-        bool Add(T item);
-        bool Update(T item);
-        bool Delete(int id);
     }
 }

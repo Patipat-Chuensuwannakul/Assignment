@@ -17,35 +17,21 @@ namespace WebAPI.Infrastructure.Repositories
         }
         public IEnumerable<Customer> GetAll()
         {
-            return assignmentDbContext.Customers.Include(x => x.Transactions);
+            return assignmentDbContext.Customers.Include(cust => cust.Transactions);
         }
         public Customer GetById(int id)
         {
-            return assignmentDbContext.Customers.Include(x => x.Transactions).SingleOrDefault(x => x.Id.Equals(id));
+            return assignmentDbContext.Customers.Include(cust => cust.Transactions).Where(cust => cust.Id == id).SingleOrDefault();
         }
 
         public Customer GetByEmail(string email)
         {
-            return assignmentDbContext.Customers.Include(x => x.Transactions).SingleOrDefault(x => x.Email.Equals(email));
+            return assignmentDbContext.Customers.Include(cust => cust.Transactions).Where(cust => cust.Email == email).SingleOrDefault();
         }
 
         public Customer GetByIdAndEmail(int id, string email)
         {
-            return assignmentDbContext.Customers.Include(x => x.Transactions).SingleOrDefault(x => x.Id.Equals(id) && x.Email.Equals(email));
-        }
-        public bool Add(Customer item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(Customer item)
-        {
-            throw new NotImplementedException();
+            return assignmentDbContext.Customers.Include(x => x.Transactions).Where(cust => cust.Id == id && cust.Email == email).SingleOrDefault();
         }
 
     }
