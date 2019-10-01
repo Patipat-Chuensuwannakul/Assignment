@@ -11,6 +11,5 @@ namespace Assignment.Infrastructures.DAL.Repositories
         bool Add(T item);
         bool Update(T item);
         bool Delete(int id);
-
     }
 }
