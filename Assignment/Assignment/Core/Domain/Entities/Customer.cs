@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Assignment.Core.Domain.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Assignment.Core.Domain.Entities
 {
-    public class Customer
+    public class Customer : EntityBase<int>
     {
         public int Id { get; set; }
         public string Name { get; set; }
