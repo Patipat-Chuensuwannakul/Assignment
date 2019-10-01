@@ -1,8 +1,12 @@
-﻿using Assignment.Core.Domain.Entities;
-using Assignment.Core.DTO;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Assignment.Core.Domain.Entities;
+using Assignment.Core.DTO;
+using Assignment.Core.Query;
+using Microsoft.AspNetCore.Mvc;
+using WebAPI.Infrastructure.Repositories;
 
 namespace Assignment.Controllers
 {
@@ -10,17 +14,23 @@ namespace Assignment.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
+        private readonly ICustomerRepository customerRepository;
 
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public CustomerController(ICustomerRepository customerRepository)
         {
-            return "value";
+            this.customerRepository = customerRepository;
+        }
+
+
+        [HttpGet("GetAll")]
+        public ActionResult<List<Customer>> Get(int id)
+        {
+            return this.customerRepository.GetAll().ToList();
         }
 
         [HttpGet("GetById")]
         public ActionResult<CustomerDTO> GetById(int customerId, string email)
         {
-            //var asdas = CustomerDTOsMock.Where(x => x.email == customerQuery.Email || x.customerID == customerQuery.CustomerId).SingleOrDefault();
             return new CustomerDTO()
             {
                 CustomerID = 123456,

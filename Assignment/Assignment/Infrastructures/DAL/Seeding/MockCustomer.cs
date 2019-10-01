@@ -12,9 +12,9 @@ namespace Assignment.Infrastructures.DAL.Seeding
         {
             var customer1 = new Customer()
             {
-                Email = "manaotest@domain.com",
-                Mobile = 0913962985,
-                Name = "Manao Test1",
+                Email = "test@test.com",
+                Mobile = 0912224212,
+                Name = "test test",
                 Transactions = new List<Transaction>()
             };
 
