@@ -9,9 +9,9 @@ namespace Assignment.Core.DTO
     public class TransactionDTO
     {
         public int Id { get; set; }
-        public DateTime Date { get; set; }
-        public decimal Amount { get; set; }
+        public string Date { get; set; }
+        public string Amount { get; set; }
         public string Currency { get; set; }
-        public TransactionStatus Status { get; set; }
+        public string Status { get; set; }
     }
 }

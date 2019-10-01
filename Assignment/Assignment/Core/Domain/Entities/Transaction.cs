@@ -12,7 +12,6 @@ namespace Assignment.Core.Domain.Entities
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
-
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
         public string Currency { get; set; }
@@ -23,10 +22,10 @@ namespace Assignment.Core.Domain.Entities
             return new TransactionDTO()
             {
                 Id = Id,
-                Date = Date,
-                Amount = Amount,
+                Date = Date.ToString("dd/MM/yyyy hh:mm"),
+                Amount = Amount.ToString("F"),
                 Currency = Currency,
-                Status = Status
+                Status = Status.ToString()
             };
         }
     }
