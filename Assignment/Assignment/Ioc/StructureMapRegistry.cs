@@ -1,4 +1,5 @@
 ﻿using StructureMap;
+using WebAPI.Infrastructure.Repositories;
 
 namespace Assignment.Ioc
 {
@@ -6,7 +7,7 @@ namespace Assignment.Ioc
     {
         public StructureMapRegistry()
         {
-
+            For<ICustomerRepository>().Use<CustomerRepository>();
         }
     }
 }
