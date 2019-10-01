@@ -1,4 +1,5 @@
-﻿using StructureMap;
+﻿using Assignment.Infrastructures.DAL.Services;
+using StructureMap;
 using WebAPI.Infrastructure.Repositories;
 
 namespace Assignment.Ioc
@@ -8,6 +9,7 @@ namespace Assignment.Ioc
         public StructureMapRegistry()
         {
             For<ICustomerRepository>().Use<CustomerRepository>();
+            For<ICustomerService>().Use<CustomerService>();
         }
     }
 }

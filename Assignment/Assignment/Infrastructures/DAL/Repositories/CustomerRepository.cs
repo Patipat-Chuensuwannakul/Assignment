@@ -19,6 +19,20 @@ namespace WebAPI.Infrastructure.Repositories
         {
             return assignmentDbContext.Customers.Include(x => x.Transactions);
         }
+        public Customer GetByCustomerId(int id)
+        {
+            return assignmentDbContext.Customers.Include(x => x.Transactions).SingleOrDefault(x => x.Id.Equals(id));
+        }
+
+        public Customer GetByCustomerEmail(string email)
+        {
+            return assignmentDbContext.Customers.Include(x => x.Transactions).SingleOrDefault(x => x.Email.Equals(email));
+        }
+
+        public Customer GetByIdAndEmail(int id, string email)
+        {
+            return assignmentDbContext.Customers.Include(x => x.Transactions).SingleOrDefault(x => x.Id.Equals(id) && x.Email.Equals(email));
+        }
         public bool Add(Customer item)
         {
             throw new NotImplementedException();
@@ -33,5 +47,6 @@ namespace WebAPI.Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+
     }
 }

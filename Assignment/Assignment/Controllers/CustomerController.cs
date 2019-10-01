@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Assignment.Core.Domain.Entities;
 using Assignment.Core.DTO;
 using Assignment.Core.Query;
+using Assignment.Infrastructures.DAL.Services;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Infrastructure.Repositories;
 
@@ -14,40 +15,22 @@ namespace Assignment.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly ICustomerRepository customerRepository;
+        private readonly ICustomerService customerService;
 
-        public CustomerController(ICustomerRepository customerRepository)
+        public CustomerController(ICustomerService customerService)
         {
-            this.customerRepository = customerRepository;
+            this.customerService = customerService;
         }
-
-
         [HttpGet("GetAll")]
-        public ActionResult<List<Customer>> Get(int id)
+        public ActionResult<List<CustomerDTO>> Get()
         {
-            return this.customerRepository.GetAll().ToList();
+            return this.customerService.GetAll();
         }
 
         [HttpGet("GetById")]
-        public ActionResult<CustomerDTO> GetById(int customerId, string email)
+        public ActionResult<CustomerDTO> GetById(int customerId)
         {
-            return new CustomerDTO()
-            {
-                CustomerID = 123456,
-                Name = "Manao Test1",
-                Email = "manaotest@domain.com",
-                Mobile = "+66123456789",
-                Transactions = new List<TransactionDTO>() {
-                    new TransactionDTO() {
-                        Date = DateTime.Now,
-                        Amount = 1234.56M,
-                        Currency = "USD",
-                        Status = TransactionStatus.Success
-                    }
-                }
-            };
+            return this.customerService.GetById(customerId);
         }
-
-
     }
 }

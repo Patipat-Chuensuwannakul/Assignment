@@ -9,5 +9,8 @@ namespace WebAPI.Infrastructure.Repositories
 {
     public interface ICustomerRepository: IRepository<Customer>
     {
+        Customer GetByCustomerId(int id);
+        Customer GetByCustomerEmail(string email);
+        Customer GetByIdAndEmail(int id, string email);
     }
 }
