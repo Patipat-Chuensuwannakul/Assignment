@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Assignment.ActionFilters.Customer;
-using Assignment.Core.Domain.Entities;
+﻿using Assignment.ActionFilters.Customer;
 using Assignment.Core.DTO;
-using Assignment.Core.Query;
-using Assignment.Helpers;
 using Assignment.Infrastructures.DAL.Services;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Infrastructure.Repositories;
+using System.Collections.Generic;
 
 namespace Assignment.Controllers
 {
